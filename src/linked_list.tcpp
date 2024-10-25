@@ -1,0 +1,42 @@
+#include "linked_list.hpp"
+
+namespace LCode
+{
+
+template <typename ElemT>
+LinkedList<ElemT>::LinkedList()
+: head{nullptr}, tail{nullptr}, list_size{0}
+{ }
+
+template <typename ElemT>
+LinkedList<ElemT>::LinkedList(LinkedList<ElemT> & other)
+{
+    /* TODO: copy elements over from other list */
+}
+
+template <typename ElemT>
+void LinkedList<ElemT>::append(ElemT new_element)
+{
+    // allocate node from element data
+    Node * new_node = new Node{new_element};
+
+    if (tail != nullptr)
+    {
+        // assign next pointer from current tail to new node
+        tail->set_next(new_node);
+        // assign prev pointer from new node to current tail
+        new_node->set_prev(tail);
+    }
+
+    // make the tail the address of this new node
+    tail = new_node;
+    // make the head this node if list is empty
+    if (head == nullptr && list_size == 0)
+    {
+        head = new_node;
+    }
+
+    list_size++;
+}
+
+}
